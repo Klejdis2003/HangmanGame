@@ -1,5 +1,5 @@
 #All code is mine except the ButtonClass.py. Credits to TechWithTim for sharing it.
-
+from platform import system
 import pygame as pg
 from math import floor
 from tkinter import *
@@ -9,6 +9,15 @@ from ButtonClass import Button #ButtonClass is borrowed from TechWithTim YT chan
 from string import ascii_lowercase
 import wordguesser
 import converListToString as cls
+
+def get_OS():
+    system_name = system().lower()
+    seperator = ""
+    if system_name == "linux":
+        seperator = "/"
+    elif system_name == 'lindows':
+        seperator = '\\'
+    return seperator
 
 def startNewGame():
     global number_of_tries, lines_list, letters_list, letters, secret_word
@@ -106,7 +115,7 @@ messagebox.showinfo('Tutorial','Welcome to the Hangman Game.You need to pick let
 
 images = []
 for i in range(7): #create the list of hangman images
-    image = pg.image.load(f'images\hangman{i}.png')
+    image = pg.image.load(f'images{get_OS()}hangman{i}.png')
     images.append(image)
 
 #set the game up
